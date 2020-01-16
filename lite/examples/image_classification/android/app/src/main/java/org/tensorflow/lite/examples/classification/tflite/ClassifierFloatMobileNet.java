@@ -24,10 +24,12 @@ import org.tensorflow.lite.support.common.ops.NormalizeOp;
 /** This TensorFlowLite classifier works with the float MobileNet model. */
 public class ClassifierFloatMobileNet extends Classifier {
 
-  /** Float MobileNet requires additional normalization of the used input. */
-  private static final float IMAGE_MEAN = 127.5f;
+  /** Ximilar Float MobileNet does not require any additional normalization of the used input.
+   * Normalization layer is already present in the model so you don't need to normalize.
+   * Setting mean and std as 0.0f and 1.0f, repectively, to bypass the normalization */
+  private static final float IMAGE_MEAN = 0.0f;
 
-  private static final float IMAGE_STD = 127.5f;
+  private static final float IMAGE_STD = 1.0f;
 
   /**
    * Float model does not need dequantization in the post-processing. Setting mean and std as 0.0f
@@ -49,12 +51,17 @@ public class ClassifierFloatMobileNet extends Classifier {
 
   @Override
   protected String getModelPath() {
-    // you can download this file from
-    // see build.gradle for where to obtain this file. It should be auto
-    // downloaded into assets.
-    return "mobilenet_v1_1.0_224.tflite";
+    // you can download this file from app.ximilar.com if you have custom pricing plan
+    // be aware that most models are with 224x224 resolution, but some of them can have higher
+    // if you are not sure then contact tech@ximilar.com
+    return "model.tflite";
   }
 
+  /**
+   * Be aware that every model has some outputs (named by your labels of your trained task).
+   * In the downloaded zip file from app.ximilar.com, file 'labels.txt' should be present.
+   * Insert it to the assets folder.
+   */
   @Override
   protected String getLabelPath() {
     return "labels.txt";

@@ -24,6 +24,8 @@ import org.tensorflow.lite.support.common.ops.NormalizeOp;
 /** This TensorFlow Lite classifier works with the quantized MobileNet model. */
 public class ClassifierQuantizedMobileNet extends Classifier {
 
+  //Be aware that model from ximilar app is not quantized! So use ClassifierFloatMobileNet.java !
+
   /**
    * The quantized model does not require normalization, thus set mean as 0.0f, and std as 1.0f to
    * bypass the normalization.
@@ -49,10 +51,7 @@ public class ClassifierQuantizedMobileNet extends Classifier {
 
   @Override
   protected String getModelPath() {
-    // you can download this file from
-    // see build.gradle for where to obtain this file. It should be auto
-    // downloaded into assets.
-    return "mobilenet_v1_1.0_224_quant.tflite";
+    return "model.tflite";
   }
 
   @Override
