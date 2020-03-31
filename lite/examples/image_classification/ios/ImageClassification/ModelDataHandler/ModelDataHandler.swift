@@ -279,7 +279,9 @@ class ModelDataHandler {
     let bytes = Array<UInt8>(unsafeData: byteData)!
     var floats = [Float]()
     for i in 0..<bytes.count {
-        floats.append(Float(bytes[i]) / 255.0)
+        // Ximilar Team: we comment this: floats.append(Float(bytes[i]) / 255.0)
+        // as the model already contains normalization
+        floats.append(Float(bytes[i]))
     }
     return Data(copyingBufferOf: floats)
   }
